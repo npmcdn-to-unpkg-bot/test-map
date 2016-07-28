@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <style>
+
+     html {
+       height: 100%;
+     }
+
+     #mapid { height: 100%; }
+    </style>
+
+    <div id="mapid"></div>
+
+    <script defer>
+     function addMarker() {
+         marker = L.marker([51.3+(Math.random()*0.3), -0.07+(Math.random()*0.3)]).addTo(map)
+            .bindPopup('<b>Impression: </b>' + Math.random().toFixed(2) + " EUR")
+            .openPopup();
+
+            setTimeout(function() { map.removeLayer(marker); addMarker(); }, Math.random()*2000);
+
+     }
+
+     var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+     }).addTo(map);
+
+     window.onload = function() {
+         addMarker();
+     }
+    </script>
+  </body>
+</html>
